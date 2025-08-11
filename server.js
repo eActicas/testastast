@@ -26,13 +26,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// MySQL Database setup
+// MySQL Database setup for Railway
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'idle_mmo_game',
-  port: process.env.DB_PORT || 3306,
+  host: process.env.MYSQLHOST || 'localhost',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'aoneymKedAyimncugWPdALaVPWAEdtFA',
+  database: process.env.MYSQLDATABASE || 'railway',
+  port: process.env.MYSQLPORT || 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -44,8 +44,8 @@ const db = mysql.createPool(dbConfig);
 async function testConnection() {
   try {
     const connection = await db.getConnection();
-    console.log('✅ Connected to MySQL database successfully');
-    console.log(`📍 Database: ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
+    console.log('✅ Connected to Railway MySQL database successfully');
+    console.log(`📍 Database: ${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`);
     connection.release();
     return true;
   } catch (error) {
